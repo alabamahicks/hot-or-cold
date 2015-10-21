@@ -69,37 +69,42 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
+	/*------- listen for #guessButton ---------*/
+	$( '#guessButton').click(function() {
+		//TODO: add each guessed number as an <li> to ul#guessList
+
+		//TODO: update span#count from default 0
+
+		//TODO: update div#feedback from default “Make Your Guess!”
+	});
+
+	/*------- listen for #guessButton ---------*/
+	$( '#newGame').click(function() {
+		startNewGame();
+	});
+
 });
 
 function startNewGame(){
 	//when the user clicks the “New Game”
 	// button...what must be reset?
-	// - generate secret number
+	// TODO: - generate secret number
+	// TODO: - clear ul#guessList
+	// TODO: - set span#count to 0
+	// TODO: - set div#feedback to default
 }
 
 function generateSecretNumber(){
-	//between 1 and 100
+	//TODO: between 1 and 100
 }
 
 function provideFeedback(guess){
-	//if it was too low, too
-	// high, or just right, determine which feedback to return
-	// if > 50 away: "Ice Cold"
-	// if between 30 and 50: "Cold"
-	// if between 20-30: "Warm"
-	// if between 10-20: "Hot"
-	// if between 1-10: "Supah Hot! But not it. :( "
+	//if it was too low, too high, or just right, determine which feedback to return
+	// TODO: if > 50 away: "Ice Cold"
+	// TODO: if between 30 and 50: "Cold"
+	// TODO: if between 20-30: "Warm"
+	// TODO: if between 10-20: "Hot"
+	// TODO: if between 1-10: "Supah Hot! But not it. :( "
 	var feedback;
 	return feedback;
 }
-
-//TODO: listen for guesses
-//TODO: check guess validity: numeric input between 1 and 100.
-
-//TODO: add each guessed number as an <li> to ul#guessList
-
-//TODO: update span#count from default 0
-
-//TODO: update div#feedback from default “Make Your Guess!”
-
-//TODO: listen for new game clicks
