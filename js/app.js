@@ -57,46 +57,50 @@
 
 
 $(document).ready(function(){
+	/*--- Initialize --*/
+	var secretNumber = startNewGame();
 	
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
+		alert('what was clicked');
 
   	});
 
   	/*--- Hide information modal box ---*/
   	$("a.close").click(function(){
   		$(".overlay").fadeOut(1000);
+		alert('hide info modal box');
   	});
 
 	/*------- listen for #guessButton ---------*/
 	$( '#guessButton').click(function() {
-		//TODO: add each guessed number as an <li> to ul#guessList
+		//alert(this.getAttribute("id"));
 
-		//TODO: update span#count from default 0
+		var guess = $('input#userGuess').val();
+		//alert('userGuess is ' + guess);
+
+		updateGuessList(guess); //TODO: BUG number not staying put
+		updateGuessCount(); //TODO: some refresh is clearing all
+
 
 		//TODO: update div#feedback from default “Make Your Guess!”
 	});
 
-	/*------- listen for #guessButton ---------*/
+	/*------- listen for #newGame ---------*/
 	$( '#newGame').click(function() {
 		startNewGame();
+		alert('start new game');
 	});
 
 });
 
-function startNewGame(){
-	//when the user clicks the “New Game”
-	// button...what must be reset?
-	// TODO: - generate secret number
-	// TODO: - clear ul#guessList
-	// TODO: - set span#count to 0
-	// TODO: - set div#feedback to default
-}
 
-function generateSecretNumber(){
-	//TODO: between 1 and 100
-}
+
+function getRandomArbitrary(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+
 
 function provideFeedback(guess){
 	//if it was too low, too high, or just right, determine which feedback to return
@@ -108,3 +112,32 @@ function provideFeedback(guess){
 	var feedback;
 	return feedback;
 }
+
+function startNewGame(){
+	//when the user clicks the “New Game” button...what must be reset?
+	//alert(arguments.callee.name);
+
+	// clear ul#guessList
+	$('ul#guessList li').remove();
+
+	//set span#count to 0
+	$('span#count').text('0');
+
+	//set div#feedback to default
+	$('div#feedback').text('Make Your Guess!?!');
+
+	return getRandomArbitrary(1, 100);
+}
+
+function updateGuessCount(){
+	//update span#count from default 0
+	var count  = 0;
+	count++;
+	//alert($('span#count').text());
+	$('span#count').text(count);
+}
+
+function updateGuessList(guess){
+	$('ul#guessList').append("<li>" + guess + "</li>");
+}
+
