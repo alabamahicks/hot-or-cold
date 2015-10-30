@@ -120,12 +120,12 @@ function provideFeedback(guess,secretNumber){
 	if (diff > 10) {
 		feedback = "Hot!...  Try again.";
 	} else
-	if (diff > 1) {
+	if (diff > 0) {
 		feedback = "Supah Hot! But not it. :( Try again.";
-	} else
+	} else if (diff == 0)
 	{feedback = "You got it!"}
-	return feedback;
 	alert(feedback);
+	return feedback;
 }
 
 function startNewGame(){
