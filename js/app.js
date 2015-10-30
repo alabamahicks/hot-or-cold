@@ -59,6 +59,7 @@
 $(document).ready(function(){
 	/*--- Initialize --*/
 	var secretNumber = startNewGame();
+	console.log('secret Number is '+ secretNumber);
 	
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
@@ -80,11 +81,10 @@ $(document).ready(function(){
 		var guess = $('input#userGuess').val();
 		//alert('userGuess is ' + guess);
 
-		updateGuessList(guess); //TODO: BUG number not staying put
+		updateGuessList(guess); //TODO: some refresh is clearing all
 		updateGuessCount(); //TODO: some refresh is clearing all
 
-
-		//TODO: update div#feedback from default “Make Your Guess!”
+		$('#feedback').text = provideFeedback(guess, secretNumber); //TODO: some refresh is clearing all
 	});
 
 	/*------- listen for #newGame ---------*/
@@ -98,19 +98,34 @@ $(document).ready(function(){
 
 
 function getRandomArbitrary(min, max) {
-		return Math.random() * (max - min) + min;
+	var secret = Math.random() * (max - min) + min;
+		return Math.round(secret);
 	}
 
 
-function provideFeedback(guess){
+function provideFeedback(guess,secretNumber){
 	//if it was too low, too high, or just right, determine which feedback to return
-	// TODO: if > 50 away: "Ice Cold"
-	// TODO: if between 30 and 50: "Cold"
-	// TODO: if between 20-30: "Warm"
-	// TODO: if between 10-20: "Hot"
-	// TODO: if between 1-10: "Supah Hot! But not it. :( "
+	var diff = secretNumber - guess;
 	var feedback;
+
+	if (diff > 50) {
+		feedback = "Ice Cold!  Try again.";
+	} else
+	if (diff > 30) {
+		feedback = "Cold.  Try again.";
+	} else
+	if (diff > 20) {
+		feedback = "Warmer...  Try again.";
+	} else
+	if (diff > 10) {
+		feedback = "Hot!...  Try again.";
+	} else
+	if (diff > 1) {
+		feedback = "Supah Hot! But not it. :( Try again.";
+	} else
+	{feedback = "You got it!"}
 	return feedback;
+	alert(feedback);
 }
 
 function startNewGame(){
