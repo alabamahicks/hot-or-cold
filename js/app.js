@@ -53,7 +53,9 @@
 	// do anything. You’ll need to write code that allows users to start a new
 	// game without making additional calls to the server. Clicking “New Game”
 	// should trigger the JavaScript function that starts a new game.
-
+//document.getElementById("myAnchor").addEventListener("click", function(event){
+//	event.preventDefault()
+//});
 
 
 $(document).ready(function(){
@@ -76,15 +78,16 @@ $(document).ready(function(){
 
 	/*------- listen for #guessButton ---------*/
 	$( '#guessButton').click(function() {
+		event.preventDefault(); //prevents default reloading
 		//alert(this.getAttribute("id"));
 
 		var guess = $('input#userGuess').val();
 		//alert('userGuess is ' + guess);
 
-		updateGuessList(guess); //TODO: some refresh is clearing all
-		updateGuessCount(); //TODO: some refresh is clearing all
+		updateGuessList(guess);
+		updateGuessCount();
 
-		$('#feedback').text = provideFeedback(guess, secretNumber); //TODO: some refresh is clearing all
+		$('#feedback').text = provideFeedback(guess, secretNumber); //TODO: not yet appearing in proper field, then resubmit
 	});
 
 	/*------- listen for #newGame ---------*/
@@ -130,7 +133,6 @@ function provideFeedback(guess,secretNumber){
 
 function startNewGame(){
 	//when the user clicks the “New Game” button...what must be reset?
-	//alert(arguments.callee.name);
 
 	// clear ul#guessList
 	$('ul#guessList li').remove();
